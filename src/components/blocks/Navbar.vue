@@ -134,7 +134,7 @@ export default {
      * @returns {boolean}
      */
     backDisabled() {
-      return !this.$store.state.fm[this.activeManager].historyPointer;
+      return this.$store.state.fm[this.activeManager].historyPointer <= 1; // [SM 29.04.2022]: hide moving to navigation levels <=1  
     },
 
     /**
