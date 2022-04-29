@@ -58,6 +58,7 @@ const de = {
     size: 'Dateigröße:',
   },
   manager: {
+    content: 'Inhalt',
     table: {
       date: 'Datum',
       folder: 'Ordner',

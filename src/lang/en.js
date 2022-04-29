@@ -58,6 +58,7 @@ const en = {
     size: 'Files size:',
   },
   manager: {
+    content: 'Content',
     table: {
       date: 'Date',
       folder: 'Folder',

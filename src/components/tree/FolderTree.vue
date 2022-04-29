@@ -1,17 +1,19 @@
 <template>
     <div class="fm-tree">
         <div class="fm-tree-disk sticky-top">
-            <i class="far fa-hdd"/> {{ selectedDisk }}
+            <i class="far fa-hdd"/> <!-- HIDE DISK NAME, SHOW 'CONTENT' INSTEAD  --> <!-- {{ selectedDisk }} --> {{ lang.manager.content }} 
         </div>
-        <branch v-bind:parent-id="0"/>
+        <branch v-bind:parent-id="0" v-bind:level="0"/>
     </div>
 </template>
 
 <script>
+import translate from '../../mixins/translate';
 import Branch from './Branch.vue';
 
 export default {
   name: 'FolderTree',
+  mixins: [translate],
   components: {
     branch: Branch,
   },

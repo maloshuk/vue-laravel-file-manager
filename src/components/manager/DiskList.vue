@@ -1,3 +1,4 @@
+<!-- HIDE DISKS LIST
 <template>
     <div class="fm-disk-list">
         <ul class="list-inline">
@@ -10,6 +11,9 @@
             </li>
         </ul>
     </div>
+</template>
+-->
+<template>
 </template>
 
 <script>

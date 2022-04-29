@@ -1,6 +1,9 @@
 <template>
+  <!--[SM 22.04.22] DRAW TREE ITEM IF LEVEL OF NESTING > 1. DOESN"T WORKS PROPERLY FOR SUPERADMIN --> 
+  <div v-if="level>1">
     <ul class="list-unstyled fm-tree-branch">
         <li v-for="(directory, index) in subDirectories" v-bind:key="index">
+            
             <p class="unselectable"
                v-bind:class="{'selected': isDirectorySelected(directory.path)}"
                v-on:click="selectDirectory(directory.path)">
@@ -21,11 +24,24 @@
             <transition name="fade-tree">
                 <branch v-show="arrowState(index)"
                         v-if="directory.props.hasSubdirectories"
-                        v-bind:parent-id="directory.id">
+                        v-bind:parent-id="directory.id"
+                        v-bind:level="level + 1">
                 </branch>
             </transition>
         </li>
     </ul>
+  </div>
+  <!--[SM 22.04.22] ELSE, ITERATE CHILD ITEMS -->
+  <div v-else>
+      <div v-for="(directory, index) in subDirectories" v-bind:key="index">
+          <branch 
+                  v-if="directory.props.hasSubdirectories"
+                  v-bind:parent-id="directory.id"
+                  v-bind:level="level + 1">
+          </branch>
+    </div>
+  </div>
+  
 </template>
 
 <script>
@@ -33,6 +49,7 @@ export default {
   name: 'Branch',
   props: {
     parentId: { type: Number, required: true },
+    level: {type: Number, required: true }
   },
   computed: {
     /**

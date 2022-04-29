@@ -185,6 +185,10 @@ export default {
           message: '',
         };
 
+        if(error.constructor.name == 'Cancel'){
+          error.message = 'Canceled';
+        }
+
         // add message
         if (error.response) {
           errorMessage.status = error.response.status;

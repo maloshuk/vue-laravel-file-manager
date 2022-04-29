@@ -3,18 +3,29 @@
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb"
                 v-bind:class="[manager === activeManager ? 'active-manager' : 'bg-light']">
-                <li class="breadcrumb-item" v-on:click="selectMainDirectory">
+                
+                <!-- REMOVE  BTN OPENING MAIN DISK  "   
+                <li class="breadcrumb-item" v-on:click="selectMainDirectory> 
                     <span class="badge badge-secondary">
                         <i class="far fa-hdd"/>
                     </span>
                 </li>
+                -->
+                <!-- two empty 'li' items with class 'breadcrumb-item' will draw '/'. -->  
+                <li class="breadcrumb-item"></li>
+                <li class="breadcrumb-item"></li>
+                <li></li>
+
+                
+                <!-- ONLY SHOW PATH FOR LEVEL INDEX > 1: v-if="index > 1" -->  
                 <li class="breadcrumb-item text-truncate"
                     v-for="(item, index) in breadcrumb"
+                    v-if="index > 1"
                     v-bind:key="index"
                     v-bind:class="[breadcrumb.length === index + 1 ? 'active' : '']"
                     v-on:click="selectDirectory(index)">
                     <span>{{ item }}</span>
-                </li>
+                </li>               
             </ol>
         </nav>
     </div>

@@ -88,7 +88,7 @@
                     v-bind:disabled="!countFiles"
                     v-on:click="uploadFiles">{{ lang.btn.submit }}
             </button>
-            <button class="btn btn-light" v-on:click="hideModal()">{{ lang.btn.cancel }}</button>
+            <button class="btn btn-light" v-on:click="hideModalUploader()">{{ lang.btn.cancel }}</button>
         </div>
     </div>
 </template>
@@ -171,13 +171,22 @@ export default {
           overwrite: this.overwrite,
         }).then((response) => {
           // if upload is successful
-          if (response.data.result.status === 'success') {
+          if (response && response.data && response.data.result.status === 'success') {
             // close modal window
             this.hideModal();
           }
         });
       }
     },
+      //TODO:
+    hideModalUploader(){
+        //this.$store.state.fm.messages.actionProgress = 0;
+        this.hideModal();
+        if(window.document.cancelSource){
+            window.document.cancelSource.cancel();
+        }
+    }
+
   },
 };
 </script>

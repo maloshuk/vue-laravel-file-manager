@@ -246,12 +246,15 @@ export default {
       data.append('files[]', files[i]);
     }
 
+    window.document.cancelSource = axios.CancelToken.source();
+
     // axios config - progress bar
     const config = {
       onUploadProgress(progressEvent) {
         const progress = Math.round((progressEvent.loaded * 100) / progressEvent.total);
         commit('messages/setProgress', progress);
       },
+      cancelToken: window.document.cancelSource.token
     };
 
     // upload files
@@ -260,8 +263,7 @@ export default {
       commit('messages/clearProgress');
 
       // if files uploaded successfully
-      if (
-        response.data.result.status === 'success'
+      if (response.data.result.status === 'success'
         && selectedDirectory === getters.selectedDirectory
       ) {
         // refresh content
@@ -272,6 +274,8 @@ export default {
     }).catch(() => {
       // clear progress
       commit('messages/clearProgress');
+      // refresh content
+      dispatch('refreshManagers');
     });
   },
 

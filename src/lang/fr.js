@@ -58,6 +58,7 @@ const fr = {
     size: 'Taille fichiers:',
   },
   manager: {
+    content: 'contenus',
     table: {
       date: 'Date',
       folder: 'Dossier',
