@@ -16,6 +16,7 @@ export default {
   setDirectoryContent(state, data) {
     state.directories = data.directories;
     state.files = data.files;
+    this.state.fm.settings.uploadLimitBytes = data.uploadLimitBytes;
   },
 
   /**

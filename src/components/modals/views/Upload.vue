@@ -7,6 +7,7 @@
             </button>
         </div>
         <div class="modal-body">
+                  <div calss="center">Limit MB: {{uploadLimitMBytes}}  </div>
             <div class="fm-btn-wrapper" v-show="!progressBar">
                 <button type="button" class="btn btn-secondary btn-block">
                     {{ lang.btn.uploadSelect }}
@@ -141,7 +142,10 @@ export default {
 
       return this.bytesToHuman(size);
     },
-
+    
+    uploadLimitMBytes() {
+      return  Math.round(this.$store.state.fm.settings.uploadLimitBytes / (1024*1024));
+    }
   },
   methods: {
     /**

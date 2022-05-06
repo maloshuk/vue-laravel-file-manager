@@ -43,5 +43,5 @@ export default {
    */
   inactiveManager(state) {
     return state.activeManager === 'left' ? 'right' : 'left';
-  },
+  }
 };
