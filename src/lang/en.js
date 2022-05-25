@@ -124,6 +124,8 @@ const en = {
       size: 'Size:',
       skip: 'Skip',
       title: 'Upload files',
+      limit: 'Limit',
+      overlimit: 'Overlimit'
     },
     editor: {
       title: 'Editor',

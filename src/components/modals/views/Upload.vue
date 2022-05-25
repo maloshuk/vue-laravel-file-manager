@@ -7,7 +7,7 @@
             </button>
         </div>
         <div class="modal-body">
-                  <div calss="center">Limit MB: {{uploadLimitMBytes}}  </div>
+            <div class="text-right"><strong>{{ lang.modal.upload.limit }}: </strong> {{uploadLimitMBytes}} MB</div>
             <div class="fm-btn-wrapper" v-show="!progressBar">
                 <button type="button" class="btn btn-secondary btn-block">
                     {{ lang.btn.uploadSelect }}
@@ -34,8 +34,12 @@
                     </div>
                     <div class="text-right">
                         <strong>{{ lang.modal.upload.size }}</strong>
-                        {{ allFilesSize }}
+                        {{ allFilesSizeHuman }}
                     </div>
+
+                </div>
+                <div class="text-danger text-right"  v-if="sizeOverlimit">
+                    <sub> {{ lang.modal.upload.overlimit }} </sub>
                 </div>
                 <hr>
                 <div class="d-flex justify-content-between">
@@ -86,7 +90,7 @@
         <div class="modal-footer">
             <button class="btn"
                     v-bind:class="[countFiles ? 'btn-info' : 'btn-light']"
-                    v-bind:disabled="!countFiles"
+                    v-bind:disabled="!countFiles || sizeOverlimit"
                     v-on:click="uploadFiles">{{ lang.btn.submit }}
             </button>
             <button class="btn btn-light" v-on:click="hideModalUploader()">{{ lang.btn.cancel }}</button>
@@ -130,7 +134,7 @@ export default {
     },
 
     /**
-     * Calculate the size of all files
+     * Calculate the size of all files, bytes
      * @returns {*|string}
      */
     allFilesSize() {
@@ -140,11 +144,27 @@ export default {
         size += this.newFiles[i].size;
       }
 
-      return this.bytesToHuman(size);
+      return size;
     },
     
+    /**
+     * Calculate the size of all files, data for human
+     * @returns {*|string}
+     */
+    allFilesSizeHuman() {
+      return this.bytesToHuman( this.allFilesSize);
+    },
+
+    uploadLimitBytes() {
+      return  this.$store.state.fm.settings.uploadLimitBytes;
+    },
+
     uploadLimitMBytes() {
-      return  Math.round(this.$store.state.fm.settings.uploadLimitBytes / (1024*1024));
+      return  Math.round(this.uploadLimitBytes / (1024*1024));
+    }, 
+
+    sizeOverlimit() { 
+      return this.allFilesSize > this.uploadLimitBytes;
     }
   },
   methods: {

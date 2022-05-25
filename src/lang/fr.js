@@ -124,6 +124,8 @@ const fr = {
       size: 'Taille:',
       skip: 'Passer',
       title: 'Télécharger fichiers',
+      limit: 'Limite',
+      overlimit: 'Dépassement de limite'
     },
     editor: {
       title: 'Editeur',
