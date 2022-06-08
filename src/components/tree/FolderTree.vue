@@ -1,8 +1,10 @@
 <template>
     <div class="fm-tree">
+      <!-- HIDE DISK NAME 
         <div class="fm-tree-disk sticky-top">
-            <i class="far fa-hdd"/> <!-- HIDE DISK NAME, SHOW 'CONTENT' INSTEAD  --> <!-- {{ selectedDisk }} --> {{ lang.manager.content }} 
+            <i class="far fa-hdd"/> {{ selectedDisk }}
         </div>
+        -->
         <branch v-bind:parent-id="0" v-bind:level="0"/>
     </div>
 </template>

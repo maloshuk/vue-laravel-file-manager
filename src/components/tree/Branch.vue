@@ -1,12 +1,28 @@
 <template>
-  <!--[SM 22.04.22] DRAW TREE ITEM IF LEVEL OF NESTING > 1. DOESN"T WORKS PROPERLY FOR SUPERADMIN --> 
-  <div v-if="level>1">
+  <!--[SM 22.04.22] DRAW TREE ITEM IF LEVEL OF NESTING > 0. DOESN'T WORKS PROPERLY FOR SUPERADMIN --> 
+  <div v-if="level>0">
     <ul class="list-unstyled fm-tree-branch">
-        <li v-for="(directory, index) in subDirectories" v-bind:key="index">
-            
-            <p class="unselectable"
+        <li v-for="(directory, index) in subDirectories" v-bind:key="index" v-bind:style="[level==1 ? {'margin-left': '-28px'} : '']"> 
+            <!-- [SM 08.06.2022] show "Content" for top level -->
+            <p v-if="level==1" 
+              class="unselectable"
+              v-bind:class="{'selected': isDirectorySelected(directory.path)}"
+              v-on:click="selectDirectory(directory.path)">
+                <i class="far fa-hdd"
+                    v-if="directory.props.hasSubdirectories"
+                    v-on:click.stop="showSubdirectories(
+                          directory.path,
+                          directory.props.showSubdirectories
+                        )"/>
+
+                <i class=""/>
+                {{ lang.manager.content }}
+            </p>
+
+            <p v-else 
+               class="unselectable"
                v-bind:class="{'selected': isDirectorySelected(directory.path)}"
-               v-on:click="selectDirectory(directory.path)">
+               v-on:click="selectDirectory(directory.path)">                
                 <i class="far"
                    v-if="directory.props.hasSubdirectories"
                    v-on:click.stop="showSubdirectories(
@@ -17,7 +33,8 @@
                     ? 'fa-minus-square'
                     : 'fa-plus-square'
                    ]"/>
-                <i class="fas fa-minus fa-xs" v-else/>
+                
+                <i class="fas fa-minus fa-xs"/>
                 {{ directory.basename }}
             </p>
 
@@ -45,8 +62,11 @@
 </template>
 
 <script>
+import translate from '../../mixins/translate';
+
 export default {
   name: 'Branch',
+  mixins: [translate],
   props: {
     parentId: { type: Number, required: true },
     level: {type: Number, required: true }
@@ -122,7 +142,7 @@ export default {
 
             &:hover,
             &.selected {
-                background-color: #f8f9fa;
+                background-color: #d6e9f9;
             }
         }
 
