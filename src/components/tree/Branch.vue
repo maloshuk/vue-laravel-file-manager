@@ -34,7 +34,9 @@
                     : 'fa-plus-square'
                    ]"/>
                 
-                <i class="fas fa-minus fa-xs"/>
+
+                <i v-if="directory.props.hasSubdirectories" class=""/>
+                <i v-else class="fas fa-minus fa-xs"/>
                 {{ directory.basename }}
             </p>
 
