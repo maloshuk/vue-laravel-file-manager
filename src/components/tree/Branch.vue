@@ -1,10 +1,10 @@
 <template>
-  <!--[SM 22.04.22] DRAW TREE ITEM IF LEVEL OF NESTING > 0. DOESN'T WORKS PROPERLY FOR SUPERADMIN --> 
-  <div v-if="level>0">
+  <!--[SM 22.04.22] DRAW TREE ITEM IF LEVEL OF NESTING >= 0. DOESN'T WORKS PROPERLY FOR SUPERADMIN --> 
+  <div v-if="level>=0">
     <ul class="list-unstyled fm-tree-branch">
-        <li v-for="(directory, index) in subDirectories" v-bind:key="index" v-bind:style="[level==1 ? {'margin-left': '-28px'} : '']"> 
-            <!-- [SM 08.06.2022] show "Content" for top level -->
-            <p v-if="level==1" 
+        <li v-for="(directory, index) in subDirectories" v-bind:key="index" v-bind:style="[level==0 ? {'margin-left': '-28px'} : '']"> 
+            <!-- [SM 21.02.2023] show "Content" for top level -->
+            <p v-if="level==0" 
               class="unselectable"
               v-bind:class="{'selected': isDirectorySelected(directory.path)}"
               v-on:click="selectDirectory(directory.path)">

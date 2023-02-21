@@ -17,10 +17,10 @@
                 <li></li>
 
                 
-                <!-- ONLY SHOW PATH FOR LEVEL INDEX > 1: v-if="index > 1" -->  
+                <!-- ONLY SHOW PATH FOR LEVEL INDEX > 0 -->  
                 <li class="breadcrumb-item text-truncate"
                     v-for="(item, index) in breadcrumb"
-                    v-if="index > 1"
+                    v-if="index > 0"
                     v-bind:key="index"
                     v-bind:class="[breadcrumb.length === index + 1 ? 'active' : '']"
                     v-on:click="selectDirectory(index)">

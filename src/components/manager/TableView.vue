@@ -42,7 +42,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-if="!isRootPath && selectedDirectory.split('/').length > 2"> <!-- FORBID WALKING UP AT 2 TOP LEVELS  -->
+                <tr v-if="!isRootPath && selectedDirectory.split('/').length > 1"> <!-- FORBID WALKING UP TO TOPMSOT LEVEL -->
                     <td colspan="4" class="fm-content-item"  v-on:click="levelUp">
                         <i class="fas fa-level-up-alt"/>
                     </td>
